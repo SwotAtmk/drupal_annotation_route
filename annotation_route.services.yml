@@ -1,0 +1,10 @@
+services:
+  # 路由订阅者事件
+  annotation_route.route_subcriber:
+    class: Drupal\annotation_route\EventSubscriber\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  # 注解扫描服务
+  annotation_route.annotation_service:
+    class: Drupal\annotation_route\Service\AnnotationService
+

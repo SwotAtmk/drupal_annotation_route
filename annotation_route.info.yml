@@ -1,0 +1,5 @@
+name: Annotation Route
+description: 这是一个路由扫描模块，可以帮助你使用注解的形式来使用路由，而不是在 ***.routing.yml 文件中配置路由。
+type: module
+package: Annotation Route Module
+core: 8.x

@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Jarming
+ */
+
+/**
+ * Implements hook_help().
+ */
+function annotation_route_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    case 'help.page.annotation_route':
+      $output = '<h3>' . t('关于') . '</h3>';
+      $output .= '<p>' . t('这是一个路由扫描模块，可以帮助你使用注解的形式来使用路由，而不是在 ***.routing.yml 文件中配置路由。。') . '</p>';
+      return $output;
+  }
+}
