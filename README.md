@@ -11,18 +11,18 @@
 
 Drupal Form表单注解路由的使用说明
 #### 其使用方式与注解路由控制器类似，唯一不同的是其中的title，title可以在参数中直接定义，也可以像Drupal官方文档一样在 defaults={"_title":"自定义title"} 中定义
-```php
-  # 在 taowen/src/Form 下新建自定义Form表单TestAnnotationForm
-  namespace Drupal\taowen\Form;
 
-  use Drupal\Core\Form\FormBase;
+```php
+  # 在 annotation_route/src/Form 下新建自定义Form表单TestAnnotationForm
+  namespace Drupal\annotation_route\Form;
+
+  use Drupal\annotation_route\Annotation\Form;use Drupal\Core\Form\FormBase;
   use Drupal\Core\Form\FormStateInterface;
-  use Drupal\taowen\Annotation\FormRouteAnnotation;
 
   /**
    * Class TestForm
-   * @package Drupal\taowen\Form
-   * @FormRouteAnnotation(
+   * @package Drupal\annotation_route\Form
+   * @Form(
    *   "/test/form/lll",
    *   title="这是一个测试表单注解路由，title参数为必选参数，title与defaults参数中的'_title'参数一致，title参数的优先级大于defaults参数中的_title"
    * )
@@ -49,7 +49,7 @@ Drupal Form表单注解路由的使用说明
     }
   }
 ```
-#### 注：请勿将注解标签@FormRouteAnnotation用在function上，不然会有意想不到的问题，使用@FormRouteAnnotation注解时请在当前类中引入'use Drupal\taowen\Annotation\FormRouteAnnotation;'，否则会出错。
+#### 注：请勿将注解标签@Form用在function上，不然会有意想不到的问题，使用@Form注解时请在当前类中引入'use Drupal\annotation_route\Annotation\Form;'，否则会出错。
 
 
 ## 注解服务 （Annotation Service）
@@ -75,8 +75,8 @@ class AccountClass{
     }
 }
 
-$annotationService = \Drupal\taowen\TaowenClassFactory::AnnotationService();
+$annotationService = \Drupal\annotation_route\AnnotationRouteClassFactory::AnnotationService();
 $annotationService->initService();
 $annotationService->setAnnotationClass(TestAnnotationClass::class); // 设置注解类
 $annotationService->loadClass(AccountClass::class); // 指定扫描类形式
-$annotationService->loadPath("/Users/jarming/……/modules/custom/taowen/src/Controller"); // 指定扫描路径，工具类会扫描该目录下中的 *.php 文件中的所有class类
+$annotationService->loadPath("/Users/jarming/……/modules/custom/annotation_route/src/Controller"); // 指定扫描路径，工具类会扫描该目录下中的 *.php 文件中的所有class类
