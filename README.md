@@ -2,6 +2,17 @@
 
 作者：Jarming
 
+## Composer依赖
+```
+  composer require symfony/config
+```
+
+## PHP版本
+```
+  PHP_VERSION >= 7.2
+```
+
+
 ## 说明
 此模块结合了Symfony3.4框架的设计模式 和 Drupal Module的扩展功能进行实现。方便使用注解的方式来配置路由，而不是使用module_name.route.yml的方式配置路由。路由部分与symfony3.4的设计模式类似，详细的使用方式可以参照symfony和Drupal官方文档对Route的解释说明。
 
