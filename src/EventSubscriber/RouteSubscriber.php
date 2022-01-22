@@ -74,8 +74,12 @@ class RouteSubscriber extends RouteSubscriberBase
     //按顺序加载对应的路由
     foreach ($this->ROUTE_ANNOTATION_SCAN_PATHS as $path){
       if (is_dir($path."Controller")){
-        $annotationRouteCollection = $annotationDirectoryLoader->load($path."Controller"); // 扫描注解路由到RouteCollection
-        $collection->addCollection($annotationRouteCollection);//将路由添加到RouteCollection
+          try{
+            $annotationRouteCollection = $annotationDirectoryLoader->load($path."Controller"); // 扫描注解路由到RouteCollection
+            $collection->addCollection($annotationRouteCollection);//将路由添加到RouteCollection
+          }catch (\Exception $annotationException){
+            AnnotationRouteClassFactory::logger()->error($annotationException->getMessage());
+          }
       }
     }
 
@@ -85,9 +89,13 @@ class RouteSubscriber extends RouteSubscriberBase
     $annotationService->setAnnotationClass(Form::class);
     foreach ($this->ROUTE_ANNOTATION_SCAN_PATHS as $path){
       if (is_dir($path."Form")){
-        $formRouteAnnotations = $annotationService->loadPath($path."Form");
-        $form_collection = $this->compileFormRouteAnnotations($formRouteAnnotations);
-        $collection->addCollection($form_collection);
+          try {
+              $formRouteAnnotations = $annotationService->loadPath($path . "Form");
+              $form_collection = $this->compileFormRouteAnnotations($formRouteAnnotations);
+              $collection->addCollection($form_collection);
+          }catch (\Exception $exception){
+              AnnotationRouteClassFactory::logger()->error($exception->getMessage());
+          }
       }
     }
 
