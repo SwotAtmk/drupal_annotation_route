@@ -31,6 +31,7 @@ class AnnotationRouteAnnotationClassLoader extends AnnotationClassLoader
   protected function createRoute($path, $defaults, $requirements, $options, $host, $schemes, $methods, $condition)
   {
     $options["compiler_class"] = RouteCompiler::class;    // 设置由Drupal提供的路由编译器
+    if (!isset($requirements["_permission"]) || empty($requirements["_permission"])) $requirements["_permission"] = "access content";
     return parent::createRoute($path, $defaults, $requirements, $options, $host, $schemes, $methods, $condition);
   }
 }
